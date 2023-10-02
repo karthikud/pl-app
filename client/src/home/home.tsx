@@ -31,25 +31,24 @@ const GET_CONTRACTS = gql`
 `;
 
 export default function Home() {
-  const [blogs, setBlogs] = React.useState<ContractProps[]>([]);
+  const [contracts, setContracts] = React.useState<ContractProps[]>([]);
 
   const { data } = useQuery<{ contracts: ContractProps[] }>(GET_CONTRACTS);
 
   React.useEffect(() => {
     if (data?.contracts?.length !== undefined) {
-      setBlogs(data.contracts);
+      setContracts(data.contracts);
     }
   }, [data]);
-  // Creating subscription for blogs //
-// Creating subscription for blogs //
+// Creating subscription for contracts //
 useSubscription(CONTRACTS_SUBSCRIPTION, {
   onData: (subscriptionData: any) => {
     // This function will get triggered once a publish event is being initiated by the server
-    // when a new blog is being added
+    // when a new contrcat is being added
     console.log("subscriptionData", subscriptionData)
     if (subscriptionData?.data?.data?.contractCreated) {
-      // We are updating the state of blogs
-      setBlogs([...blogs, ...subscriptionData?.data?.data?.contractCreated ?? []]);
+      // We are updating the state of contracts
+      setContracts([...contracts, ...subscriptionData?.data?.data?.contractCreated ?? []]);
     }
   },
 });
@@ -70,7 +69,7 @@ useSubscription(CONTRACTS_SUBSCRIPTION, {
         {/* Second Column */}
         <Grid item xs={12} sm={6}>
           <Paper elevation={3} style={{ padding: '20px' }}>
-          {blogs.map(({ id, name, category,salesRep,value },index) => (
+          {contracts.map(({ id, name, category,salesRep,value },index) => (
         <Contract key={index} category={category} salesRep={salesRep} value={value} id={id} name={name} />
       ))}
           </Paper>
