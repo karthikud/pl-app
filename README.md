@@ -1,5 +1,5 @@
 # pl-app
-Run docker compose -d to start frontend , backend and postgres database 
+Run `docker compose -d` to start frontend , backend and postgres database 
 
 
  Below video demonstrates 
