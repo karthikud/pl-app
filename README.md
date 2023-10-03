@@ -1,4 +1,6 @@
 # pl-app
+Run docker compose -d to start frontend , backend and postgres database 
+
 
  Below video demonstrates 
 -  GraphQl Api Apollo Studio  Available on localhost:8080/graphql
